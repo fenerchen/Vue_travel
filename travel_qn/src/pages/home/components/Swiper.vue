@@ -2,7 +2,7 @@
     <div class="wrapper">
         <swiper :options="swiperOption" class="swiper-container" >
         <!-- slides -->
-        <swiper-slide class="swiper-item" v-for='item of swiperList' :key='item.id'>
+        <swiper-slide class="swiper-item" v-for='item of list' :key='item.id'>
             <img class='swiper-img' :src='item.imgUrl' alt="去哪儿门票" />
         </swiper-slide>
         <!-- Optional controls ,显示小点-->
@@ -15,6 +15,11 @@
 export default {
     name:'HomeSwiper',
     //es6的写法，相当于data:function(){return{swiperOption:{}}}
+    //接收来自父组件的数据
+    props: {
+        list:Array
+    },
+    
     data(){
         return{
             swiperOption:{
@@ -25,26 +30,10 @@ export default {
                 //每张播放时长3秒，自动播放
                 autoplay:2000,
                 //滑动速度
-                speed:1000,
-                // delay:1000
-                
+                speed:1000,       
                
             },
-            //三张轮播，使用变量循环
-            swiperList:[
-                {
-                    id:'001',
-                    imgUrl:"http://img1.qunarzz.com/piao/fusion/1805/d4/d41d77b6ba8aca02.jpg_750x200_ac3d9a73.jpg"
-                },
-                {
-                    id:'002',
-                    imgUrl:"http://img1.qunarzz.com/piao/fusion/1805/f1/e57bc93226317102.jpg_750x200_9ab37bd0.jpg"
-                },
-                {
-                    id:'003',
-                    imgUrl:"http://img1.qunarzz.com/piao/fusion/1804/c4/1cdd28811593b802.jpg_750x200_5fbb7c91.jpg"
-                }
-            ]
+            
         }
     },
       
@@ -57,6 +46,7 @@ export default {
     .wrapper >>> .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet  
         width:6px
         height :6px
+        margin-bottom :.15rem !important
     .wrapper
         overflow:hidden
         width 100%

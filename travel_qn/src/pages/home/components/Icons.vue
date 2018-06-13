@@ -6,8 +6,8 @@
             <div class="icons">
                 <div class="icon" v-for='item of page' :key='item.id'>
                     <div class="icon-content">
-                        <img :src="item.imgUrl" alt="item.imgAlt" class="icon-img">
-                        <p class="icon-describe">{{item.imgAlt}}</p>
+                        <img :src="item.imgUrl" alt="item.desc" class="icon-img">
+                        <p class="icon-describe">{{item.desc}}</p>
                     </div>
                 </div>
             </div>
@@ -21,6 +21,9 @@
 
 export default {
   name: "HomeIcons",
+  props:{
+      imgList1:Array
+  },
   data(){
       return{
           swiperOption:{
@@ -28,58 +31,6 @@ export default {
                 pagination:'.swiper-pagination',  
                
             },
-          imgList1:[
-              {
-                id:'0',
-                imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/bd/9f7b9b2b60c1502.png",
-                imgAlt:"踏青赏花"
-              },
-               {
-                id:'1',
-                imgUrl:"http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png",
-                imgAlt:"必游榜单"
-              },
-               {
-                id:'2',
-                imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/76/eb88861d78fb9902.png",
-                imgAlt:"动植物园"
-              },
-               {
-                id:'3',
-                imgUrl:"http://img1.qunarzz.com/piao/fusion/1804/ed/cf572be30fc32f02.png",
-                imgAlt:"Q+精选"
-              },
-               {
-                id:'4',
-                imgUrl:"http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png",
-                imgAlt:"一日游"
-              },
-               {
-                id:'5',
-                imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/54/35899492b1302802.png",
-                imgAlt:"公园"
-              },
-               {
-                id:'6',
-                imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/20/831d62d2e1c7be02.png",
-                imgAlt:"名胜古迹"
-              },
-               {
-                id:'7',
-                imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png",
-                imgAlt:"热门景点"
-              },
-               {
-                id:'8',
-                imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/bd/9f7b9b2b60c1502.png",
-                imgAlt:"踏青赏花"
-              },
-               {
-                id:'9',
-                imgUrl:"http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png",
-                imgAlt:"必游榜单"
-              }
-          ],
       }
   },
   computed:{
@@ -106,7 +57,7 @@ export default {
         background #00b4db !important
         
 .wrapper >>> .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet  
-    margin-bottom:-.25rem !important
+    margin-bottom:-.15rem !important
     width:6px
     height :6px
 .icons 
@@ -115,7 +66,7 @@ export default {
     overflow: hidden;
     // height: 0;
     // 站位
-    // padding-bottom: 50%;
+    padding-bottom: 50%;
     // height :50%
     display:flex
     flex-wrap:wrap

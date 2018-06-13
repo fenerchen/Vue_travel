@@ -7,11 +7,13 @@
     <div class="header-input">
         <span class="iconfont">&#xe632;</span>
         输入城市/景点/游玩主题
-        </div>
-    <div class="header-right">
-        城市
-        <span class="iconfont ico-arrow">&#xe61c;</span>
     </div>
+    <router-link to='/city'>
+        <div class="header-right">
+            {{this.city}}
+            <span class="iconfont ico-arrow">&#xe61c;</span>
+        </div>
+    </router-link>
 </div>
    
 </template>
@@ -20,7 +22,10 @@
 //设计稿的100px==我们设置的css50px,也就是1rem。
 
 export default {
-  name: "Header"
+  name: "Header",
+  props:{
+      city:String
+  }
 };
 </script>
 <style lang='stylus' scoped>
@@ -30,7 +35,7 @@ export default {
     @import '~styles/varibles.styl'
     .header
         display :flex
-        line-height:0.86rem
+        line-height:$headerHeight
         background :$bgColor
         color:#fff
         .header-left
@@ -55,9 +60,10 @@ export default {
             width:1.24rem
             text-align:center
             float:right
+            color:#fff
             .ico-arrow
-               font-size:.24rem 
-               margin-left :-.05rem
+                 font-size:.24rem 
+                 margin-left :-.05rem
 
 </style>
 
