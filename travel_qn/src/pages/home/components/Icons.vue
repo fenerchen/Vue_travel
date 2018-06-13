@@ -2,9 +2,9 @@
 <div class="wrapper">
         <swiper :options="swiperOption" class="swiper-container" >
         <!-- slides -->
-         <swiper-slide class="swiper-item" >
+         <swiper-slide class="swiper-item" v-for="(page,index) of pages" :key='index' >
             <div class="icons">
-                <div class="icon" v-for='item of imgList1' :key='item.id'>
+                <div class="icon" v-for='item of page' :key='item.id'>
                     <div class="icon-content">
                         <img :src="item.imgUrl" alt="item.imgAlt" class="icon-img">
                         <p class="icon-describe">{{item.imgAlt}}</p>
@@ -12,31 +12,10 @@
                 </div>
             </div>
         </swiper-slide>
-        <swiper-slide class="swiper-item" >
-            <div class="icons">
-            
-                <div class="icon" v-for='item of imgList2' :key='item.id'>
-                    <div class="icon-content">
-                        <img :src="item.imgUrl" alt="item.imgAlt" class="icon-img">
-                        <p class="icon-describe">{{item.imgAlt}}</p>
-                    </div>
-                </div>
-            </div>
-        </swiper-slide>
-        <!-- Optional controls ,显示小点-->
         <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
   </div>
     
-     <!-- <div class="icons">
-       
-        <div class="icon" v-for='item of imgList' :key='item.id'>
-            <div class="icon-content">
-                <img :src="item.imgUrl" alt="item.imgAlt" class="icon-img">
-                <p class="icon-describe">{{item.imgAlt}}</p>
-            </div>
-        </div>
-    </div> -->
 </template>
 <script>
 
@@ -89,10 +68,8 @@ export default {
                 id:'7',
                 imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png",
                 imgAlt:"热门景点"
-              }
-          ],
-           imgList2:[
-              {
+              },
+               {
                 id:'8',
                 imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/bd/9f7b9b2b60c1502.png",
                 imgAlt:"踏青赏花"
@@ -102,8 +79,23 @@ export default {
                 imgUrl:"http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png",
                 imgAlt:"必游榜单"
               }
-             
           ],
+      }
+  },
+  computed:{
+      //相当于pages:function(){}
+      pages(){
+          const pages=[]
+          this.imgList1.forEach((item,index)=>{
+              const page=Math.floor(index/8)
+            //   创建子数组
+              if(!pages[page]){
+                  pages[page]=[]
+              }
+              //把元素放进数组
+              pages[page].push(item)
+          })
+          return pages
       }
   }
 };
@@ -112,35 +104,38 @@ export default {
 @import '~styles/mixins.styl'
 .wrapper >>>.swiper-pagination-bullet-active
         background #00b4db !important
+        
 .wrapper >>> .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet  
-    margin-bottom:-.2rem !important
+    margin-bottom:-.25rem !important
+    width:6px
+    height :6px
 .icons 
     // border:1px solid
     width: 100%;
     overflow: hidden;
-    height: 0;
+    // height: 0;
     // 站位
     // padding-bottom: 50%;
-    height :30%
+    // height :50%
     display:flex
     flex-wrap:wrap
     // justify-content:space-between
     // background: red
-    padding-bottom:.2rem
+    padding-bottom:.25rem
     .icon 
         width: 25%
-        // height:15%
+        height:50%
         display :flex
         flex-direction :column
         justify-content:center
         text-align :center
-        margin-top:0.1rem
+        margin-top:0.15rem
         // border:1px solid
         .icon-img
-            width:50%;
+            width:70%;
             // height:60%
         .icon-describe
-            font-size:6px
-            margin-top:0.02rem
+            // font-size:10px
+            margin-top:0.1rem
             ellipsis()
 </style>

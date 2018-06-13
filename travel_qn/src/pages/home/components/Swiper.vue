@@ -54,6 +54,9 @@ export default {
 // >>>穿透作用，因为swiper-pagination-bullet-active类在组件内部定义的，想要wrapper也能作用到，可以用>>>
     .wrapper >>>.swiper-pagination-bullet-active
         background #fff !important
+    .wrapper >>> .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet  
+        width:6px
+        height :6px
     .wrapper
         overflow:hidden
         width 100%
