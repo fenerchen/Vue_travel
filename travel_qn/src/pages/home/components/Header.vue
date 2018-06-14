@@ -10,7 +10,7 @@
     </div>
     <router-link to='/city'>
         <div class="header-right">
-            {{this.city}}
+            <span class="header-city"> {{this.city}}</span>
             <span class="iconfont ico-arrow">&#xe61c;</span>
         </div>
     </router-link>
@@ -20,12 +20,15 @@
 <script>
 // 1rem=html font-dize=50px,设计稿给出的尺寸是屏幕的尺寸，对于2倍屏的手机来说
 //设计稿的100px==我们设置的css50px,也就是1rem。
-
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: "Header",
   props:{
-      city:String
-  }
+    //   city:String
+  },
+  computed: {
+    ...mapState(['city'])
+  },
 };
 </script>
 <style lang='stylus' scoped>
@@ -33,6 +36,7 @@ export default {
 // 当引入css文件时，需要在@前面加一个~
     // @import '~@/assets/styles/varibles.styl'
     @import '~styles/varibles.styl'
+    @import '~styles/mixins.styl'
     .header
         display :flex
         line-height:$headerHeight
@@ -61,9 +65,14 @@ export default {
             text-align:center
             float:right
             color:#fff
+            display :flex;
+            justify-content :center
+            .header-city
+                max-width :0.8rem
+                ellipsis()
             .ico-arrow
                  font-size:.24rem 
-                 margin-left :-.05rem
+                //  margin-left :-.05rem
 
 </style>
 

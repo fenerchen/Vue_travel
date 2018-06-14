@@ -5,7 +5,7 @@
                 <div class="title border-topbottom">当前城市</div>
                 <div class="button-list">
                     <div class="button-wrapper">
-                        <div class="butn">北京</div>
+                        <div class="butn">{{this.currentCity}}</div>
                     </div>
                 </div>
             </div>
@@ -13,14 +13,14 @@
                 <div class="title border-topbottom">热门城市</div>
                 <div class="button-list">
                     <div class="button-wrapper" v-for='hotcity of hotCities' :key='hotcity.id'>
-                        <div class="butn">{{hotcity.name}}</div>
+                        <div class="butn" @click='handleCLickcity'>{{hotcity.name}}</div>
                     </div>
                 </div>
             </div>
-            <div class="area" v-for='(city,key) of cities' :key='key'>
+            <div class="area" v-for='(items,key) of cities' :key='key' :ref='key'>
                 <div class="title border-topbottom">{{key}}</div>
                 <div class="item-list">
-                    <div class="item border-bottom" v-for='item of city' :key='item.id'>{{item.name}}</div>
+                    <div class="item border-bottom" v-for='item of items' :key='item.id' @click='handleCLickcity'>{{item.name}}</div>
                 </div>
             </div>
         </div>
@@ -28,15 +28,47 @@
 </template>
 <script>
 import BScroll from 'better-scroll'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
     name:'CityList',
     props:{
         hotCities:Array,
-        cities:Object
+        cities:Object,
+        letter:String
     },
     mounted(){
+        //获取要滚动的父元素，只滚动父元素的第一个孩子
         this.scroll=new BScroll(this.$refs.wrapper)
+    },
+     computed: {
+    ...mapState({
+      currentCity: 'city'
+    })
+   
+  },
+    methods:{
+        handleCLickcity(e){
+            // this.$store.dispatch('handleCLickcity',e.target.innerText)
+            this.changeCity(e.target.innerText)
+           // this.$store.commit('handleCLickcity',e.target.innerText)
+            this.$router.push('/')
+            
+            // alert(e.target.innerText)
+        },
+         ...mapMutations(['changeCity'])
+    },
+    watch:{
+        //letter变化就执行函数
+        letter(){
+            if(this.letter){
+                //获取letter指向的部分
+                const ele=this.$refs[this.letter][0]
+//该部分进入视野
+                this.scroll.scrollToElement(ele)
+            }
+            // console.log(this.letter)
+        }
     }
 }
 </script>

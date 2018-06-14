@@ -12,6 +12,7 @@ import 'styles/iconfont.css'
 import 'styles/border.css'
 // 一定段300ms点击延迟问题，造成体验较差。解决方案，引入fastclick库
 import fastClick from 'fastclick'
+import store from './store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 // require styles
@@ -24,10 +25,11 @@ Vue.config.productionTip = false
 // 把fastClick绑定到document.body上
 fastClick.attach(document.body)
 /* eslint-disable no-new */
-new Vue({
+var vm=new Vue({
   el: '#app',
   // router必须有，否则app中的使用router-view会报错
   router,
+  store,
   // 这里的App是从import App from './App'这里倒入的变量，可以更改
   components: { App },
   template: '<App/>'
