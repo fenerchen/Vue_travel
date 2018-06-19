@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
+    <!-- 使用 keep-alive时，再次进入页面调用activited周期函数，不调用mounted-->
     <keep-alive>
        <router-view/>
     </keep-alive>

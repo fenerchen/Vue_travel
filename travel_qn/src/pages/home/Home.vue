@@ -60,7 +60,7 @@ export default {
     }
   },
   mounted () {
-    this.lastCity = this.cit
+    this.lastCity = this.city
     this.getHomeInfo()
   },
   activated () {

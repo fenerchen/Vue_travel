@@ -29,6 +29,7 @@ export default {
   computed: {
     ...mapState(['city'])
   },
+  
 };
 </script>
 <style lang='stylus' scoped>
